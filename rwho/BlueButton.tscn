@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://button.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Sprite
+
+func _process(delta):
+	var on = not $BlueButton.get_overlapping_bodies().empty()
+	for door in get_tree().get_nodes_in_group(\"blue_door\"):
+		door.set_open(on)"
+
+[sub_resource type="RectangleShape2D" id=2]
+
+extents = Vector2( 7.24471, 0.678345 )
+
+[node name="BlueButton" type="Sprite"]
+position = Vector2( 8, 8 )
+texture = ExtResource( 1 )
+script = SubResource( 1 )
+
+[node name="BlueButton" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlueButton"]
+position = Vector2( -0.69931, 6.64336 )
+shape = SubResource( 2 )
+

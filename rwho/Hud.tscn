@@ -1,0 +1,213 @@
+[gd_scene load_steps=29 format=2]
+
+[ext_resource path="res://BG_lvl0.png" type="Texture" id=1]
+[ext_resource path="res://Hud.tres" type="TileSet" id=2]
+[ext_resource path="res://Ladder.tscn" type="PackedScene" id=3]
+[ext_resource path="res://LadderTop.tscn" type="PackedScene" id=4]
+[ext_resource path="res://GGJ19/Assets/HUB/hudTerminal2_1.png" type="Texture" id=5]
+[ext_resource path="res://GGJ19/Assets/HUB/hudTerminal2_2.png" type="Texture" id=6]
+[ext_resource path="res://GGJ19/Assets/HUB/hudTerminal2_3.png" type="Texture" id=7]
+[ext_resource path="res://GGJ19/Assets/HUB/hudTerminal3_1.png" type="Texture" id=8]
+[ext_resource path="res://GGJ19/Assets/HUB/hudTerminal3_2.png" type="Texture" id=9]
+[ext_resource path="res://GGJ19/Assets/HUB/hudTerminal3_3.png" type="Texture" id=10]
+[ext_resource path="res://GGJ19/Assets/HUB/hudTerminal4_1.png" type="Texture" id=11]
+[ext_resource path="res://GGJ19/Assets/HUB/hudTerminal4_2.png" type="Texture" id=12]
+[ext_resource path="res://GGJ19/Assets/HUB/hudTerminal4_3.png" type="Texture" id=13]
+[ext_resource path="res://HudPortal.tres.gd" type="Script" id=14]
+[ext_resource path="res://GGJ19/Assets/Revisoes/Terminais/Terminal1.png" type="Texture" id=15]
+[ext_resource path="res://GGJ19/Assets/Revisoes/Terminais/Terminal2.png" type="Texture" id=16]
+[ext_resource path="res://Character.tscn" type="PackedScene" id=17]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Node2D
+
+func _ready():
+	Global.startscreen.get_node(\"CanvasLayer/CRT\").visible = false
+	if Global.return_position:
+		Global.character.position = Global.return_position"
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="GDScript" id=3]
+
+script/source = "extends Area2D
+
+func _process(delta):
+	if Input.is_action_pressed(\"ui_enter\") and Global.character in get_overlapping_bodies() and not Global.transitioning:
+		Global.return_position = Global.character.position
+		Global.transitioning = true
+		Global.transition.fade_to(1.0,0.5)
+		yield(Global.transition,\"done\")
+		$\"../..\".queue_free()
+		Global.goto(\"res://fase1.tscn\")"
+
+[sub_resource type="RectangleShape2D" id=4]
+
+
+[sub_resource type="SpriteFrames" id=5]
+
+animations = [ {
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="GDScript" id=6]
+
+script/source = "extends Area2D
+
+func _process(delta):
+	if Input.is_action_pressed(\"ui_enter\") and Global.character in get_overlapping_bodies() and not Global.transitioning:
+		Global.return_position = Global.character.position
+		Global.transitioning = true
+		Global.transition.fade_to(1.0,0.5)
+		yield(Global.transition,\"done\")
+		$\"../..\".queue_free()
+		Global.goto(\"res://Level2.tscn\")"
+
+[sub_resource type="SpriteFrames" id=7]
+
+animations = [ {
+"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="GDScript" id=8]
+
+script/source = "extends Area2D
+
+func _process(delta):
+	if Input.is_action_pressed(\"ui_enter\") and Global.character in get_overlapping_bodies() and not Global.transitioning:
+		Global.return_position = Global.character.position
+		Global.transitioning = true
+		Global.transition.fade_to(1.0,0.5)
+		yield(Global.transition,\"done\")
+		$\"../..\".queue_free()
+		Global.goto(\"res://Level3.tscn\")"
+
+[sub_resource type="RectangleShape2D" id=11]
+
+
+[sub_resource type="SpriteFrames" id=12]
+
+animations = [ {
+"frames": [ ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="GDScript" id=9]
+
+script/source = "extends Node
+
+func _process(delta):
+	if Global.completed1 and Global.completed2 and Global.completed3:
+		get_parent().set_enabled(true)"
+
+[node name="Hud" type="Node2D"]
+script = SubResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ -40.0 ]
+}
+
+[node name="BG_lvl0" type="TextureRect" parent="."]
+margin_right = 512.0
+margin_bottom = 288.0
+texture = ExtResource( 1 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 0, 8, 0, 1, 8, 0, 2, 8, 0, 3, 8, 0, 4, 8, 0, 5, 8, 0, 6, 8, 0, 7, 8, 0, 8, 8, 0, 9, 8, 0, 10, 8, 0, 11, 8, 0, 12, 8, 0, 13, 8, 0, 14, 8, 0, 15, 8, 0, 16, 8, 0, 17, 8, 0, 18, 8, 0, 19, 8, 0, 20, 8, 0, 21, 8, 0, 22, 8, 0, 23, 8, 0, 24, 8, 0, 25, 8, 0, 26, 8, 0, 27, 8, 0, 28, 8, 0, 29, 8, 0, 30, 8, 0, 31, 8, 0, 65536, 8, 0, 65537, 7, 0, 65538, 0, 0, 65539, 1, 0, 65540, 2, 0, 65541, 0, 0, 65542, 1, 0, 65543, 0, 0, 65544, 1, 0, 65545, 2, 0, 65546, 0, 0, 65547, 0, 0, 65548, 1, 0, 65549, 2, 0, 65550, 0, 0, 65551, 1, 0, 65552, 2, 0, 65553, 0, 0, 65554, 1, 0, 65555, 2, 0, 65556, 0, 0, 65557, 1, 0, 65558, 2, 0, 65559, 0, 0, 65560, 1, 0, 65561, 2, 0, 65562, 0, 0, 65563, 1, 0, 65564, 2, 0, 65565, 0, 0, 65566, 7, 0, 65567, 8, 0, 131072, 8, 0, 131073, -1073741822, 0, 131102, -1073741822, 0, 131103, 8, 0, 196608, 8, 0, 196609, -1073741823, 0, 196638, -1073741823, 0, 196639, 8, 0, 262144, 8, 0, 262145, -1073741824, 0, 262174, -1073741824, 0, 262175, 8, 0, 327680, 8, 0, 327681, -1073741822, 0, 327710, -1073741822, 0, 327711, 8, 0, 393216, 8, 0, 393217, -1073741823, 0, 393246, -1073741823, 0, 393247, 8, 0, 458752, 8, 0, 458753, -1073741824, 0, 458782, -1073741824, 0, 458783, 8, 0, 524288, 8, 0, 524289, 7, 0, 524290, 0, 0, 524291, 1, 0, 524292, 2, 0, 524293, 2, 0, 524294, 7, 0, 524313, 7, 0, 524314, 0, 0, 524315, 1, 0, 524316, 2, 0, 524317, 0, 0, 524318, 7, 0, 524319, 8, 0, 589824, 8, 0, 589825, -1073741822, 0, 589854, -1073741822, 0, 589855, 8, 0, 655360, 8, 0, 655361, -1073741823, 0, 655390, -1073741823, 0, 655391, 8, 0, 720896, 8, 0, 720897, -1073741824, 0, 720926, -1073741824, 0, 720927, 8, 0, 786432, 8, 0, 786433, -1073741822, 0, 786462, -1073741822, 0, 786463, 8, 0, 851968, 8, 0, 851969, -1073741823, 0, 851998, -1073741823, 0, 851999, 8, 0, 917504, 8, 0, 917505, -1073741824, 0, 917534, -1073741824, 0, 917535, 8, 0, 983040, 8, 0, 983041, 7, 0, 983042, 0, 0, 983043, 1, 0, 983044, 2, 0, 983045, 7, 0, 983054, 7, 0, 983055, 0, 0, 983056, 1, 0, 983057, 7, 0, 983066, 7, 0, 983067, 3, 0, 983068, 4, 0, 983069, 6, 0, 983070, 7, 0, 983071, 8, 0, 1048576, 8, 0, 1048577, 8, 0, 1048578, 8, 0, 1048579, 8, 0, 1048580, 8, 0, 1048581, 7, 0, 1048582, 3, 0, 1048583, 4, 0, 1048584, 6, 0, 1048585, 6, 0, 1048586, 0, 0, 1048587, 1, 0, 1048588, 2, 0, 1048589, 0, 0, 1048590, 7, 0, 1048591, 8, 0, 1048592, 8, 0, 1048593, 7, 0, 1048594, 0, 0, 1048595, 1, 0, 1048596, 2, 0, 1048597, 0, 0, 1048598, 2, 0, 1048599, 6, 0, 1048600, 4, 0, 1048601, 3, 0, 1048602, 7, 0, 1048603, 8, 0, 1048604, 8, 0, 1048605, 8, 0, 1048606, 8, 0, 1048607, 8, 0, 1114112, 8, 0, 1114113, 8, 0, 1114114, 8, 0, 1114115, 8, 0, 1114116, 8, 0, 1114117, 8, 0, 1114118, 8, 0, 1114119, 8, 0, 1114120, 8, 0, 1114121, 8, 0, 1114122, 8, 0, 1114123, 8, 0, 1114124, 8, 0, 1114125, 8, 0, 1114126, 8, 0, 1114127, 8, 0, 1114128, 8, 0, 1114129, 8, 0, 1114130, 8, 0, 1114131, 8, 0, 1114132, 8, 0, 1114133, 8, 0, 1114134, 8, 0, 1114135, 8, 0, 1114136, 8, 0, 1114137, 8, 0, 1114138, 8, 0, 1114139, 8, 0, 1114140, 8, 0, 1114141, 8, 0, 1114142, 8, 0, 1114143, 8, 0 )
+
+[node name="Ladder" parent="." instance=ExtResource( 3 )]
+position = Vector2( 392, 152 )
+
+[node name="Ladder2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 392, 168 )
+
+[node name="Ladder3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 392, 184 )
+
+[node name="Ladder4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 392, 200 )
+
+[node name="Ladder5" parent="." instance=ExtResource( 3 )]
+position = Vector2( 392, 216 )
+
+[node name="Ladder6" parent="." instance=ExtResource( 3 )]
+position = Vector2( 392, 232 )
+
+[node name="Ladder7" parent="." instance=ExtResource( 3 )]
+position = Vector2( 392, 248 )
+
+[node name="LadderTop" parent="." instance=ExtResource( 4 )]
+position = Vector2( 392, 136 )
+
+[node name="Hud2" type="AnimatedSprite" parent="."]
+position = Vector2( 440, 112 )
+frames = SubResource( 2 )
+playing = true
+
+[node name="Area2D" type="Area2D" parent="Hud2"]
+position = Vector2( 0, 8 )
+script = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hud2/Area2D"]
+shape = SubResource( 4 )
+
+[node name="Hud3" type="AnimatedSprite" parent="."]
+position = Vector2( 64, 224 )
+frames = SubResource( 5 )
+playing = true
+
+[node name="Area2D2" type="Area2D" parent="Hud3"]
+position = Vector2( 0, 8 )
+script = SubResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hud3/Area2D2"]
+shape = SubResource( 4 )
+
+[node name="Hud4" type="AnimatedSprite" parent="."]
+position = Vector2( 448, 224 )
+frames = SubResource( 7 )
+frame = 1
+playing = true
+
+[node name="Area2D3" type="Area2D" parent="Hud4"]
+position = Vector2( 0, 8 )
+script = SubResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hud4/Area2D3"]
+shape = SubResource( 4 )
+
+[node name="Portal" type="Area2D" parent="."]
+position = Vector2( 255.936, 224 )
+script = ExtResource( 14 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal"]
+shape = SubResource( 11 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Portal"]
+modulate = Color( 0.364706, 0.364706, 0.364706, 1 )
+frames = SubResource( 12 )
+
+[node name="Node" type="Node" parent="Portal"]
+script = SubResource( 9 )
+
+[node name="Character" parent="." instance=ExtResource( 17 )]
+position = Vector2( 70, 120 )
+

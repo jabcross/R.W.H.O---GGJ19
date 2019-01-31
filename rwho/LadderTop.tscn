@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://LadderTop.png" type="Texture" id=1]
+[ext_resource path="res://SnapPoint.gd" type="Script" id=2]
+[ext_resource path="res://BoxBlocker.tscn" type="PackedScene" id=3]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Sprite
+
+func _ready():
+	$Area2D.connect(\"body_entered\",self,\"_body_entered\")
+	$Area2D.connect(\"body_exited\",self,\"_body_exited\")
+
+func _process(delta):
+	$OneWayCollision/CollisionShape2D.disabled = Input.is_action_pressed(\"ui_down\")
+	if Input.is_action_just_pressed(\"ui_up\"):
+		if Global.character in $Area2D.get_overlapping_bodies():
+			snap()
+		
+func _body_entered(body):
+	if Global.character is Object and Global.character == body:
+		body.ladder_count += 1
+		if Input.is_action_pressed(\"ui_up\"):
+			snap()
+		if Input.is_action_pressed(\"ui_down\"):
+			snap()
+		
+func _body_exited(body):
+	if Global.character == body:
+		body.ladder_count -= 1
+		
+func snap():
+	Global.character.position.x = position.x
+	Global.character.climbing = true"
+
+[sub_resource type="RectangleShape2D" id=2]
+
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=4]
+
+extents = Vector2( 1.81842, 1.63947 )
+
+[node name="LadderTop" type="Sprite"]
+position = Vector2( 8, 8 )
+texture = ExtResource( 1 )
+script = SubResource( 1 )
+
+[node name="OneWayCollision" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OneWayCollision"]
+shape = SubResource( 2 )
+one_way_collision = true
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource( 3 )
+
+[node name="SnapPoint" type="Area2D" parent="."]
+position = Vector2( 0, -8 )
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SnapPoint"]
+shape = SubResource( 4 )
+
+[node name="BoxBlocker" parent="." instance=ExtResource( 3 )]
+position = Vector2( -8, -8 )
+

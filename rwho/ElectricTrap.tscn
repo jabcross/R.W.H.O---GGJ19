@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://GGJ19/Assets/Fase COLETA/objeto_raio_1.png" type="Texture" id=1]
+[ext_resource path="res://GGJ19/Assets/Fase COLETA/objeto_raio_2.png" type="Texture" id=2]
+[ext_resource path="res://GGJ19/Assets/Fase COLETA/objeto_raio_3.png" type="Texture" id=3]
+[ext_resource path="res://GGJ19/Assets/Fase COLETA/objeto_raio_4.png" type="Texture" id=4]
+[ext_resource path="res://GGJ19/Assets/Fase COLETA/objeto_raio_5.png" type="Texture" id=5]
+[ext_resource path="res://GGJ19/Assets/Fase COLETA/objeto_raio_6.png" type="Texture" id=6]
+
+[sub_resource type="GDScript" id=3]
+
+script/source = "extends Area2D
+
+func _ready():
+	if randi()%2:
+		$AnimatedSprite.flip_h = true
+	if randi()%2:
+		$AnimatedSprite.flip_v = true
+	$AnimatedSprite.frame = randi()%$AnimatedSprite.frames.get_frame_count(\"default\")
+
+func _process(delta):
+	if Global.character in get_overlapping_bodies():
+		Global.character.die()"
+
+[sub_resource type="RectangleShape2D" id=1]
+
+extents = Vector2( 8, 8 )
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 30.0
+} ]
+
+[node name="ElectricTrap" type="Area2D"]
+script = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 8, 8 )
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 8, 8 )
+frames = SubResource( 2 )
+frame = 1
+playing = true
+

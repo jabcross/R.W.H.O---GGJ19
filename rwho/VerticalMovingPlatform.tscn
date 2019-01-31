@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://VerticalMovingPlatform.gd" type="Script" id=1]
+[ext_resource path="res://tile.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+extents = Vector2( 8, 96 )
+
+[node name="VerticalMovingPlatform" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 8, 96 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 8, 8 )
+texture = ExtResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 8, 24 )
+texture = ExtResource( 2 )
+
+[node name="Sprite3" type="Sprite" parent="."]
+position = Vector2( 8, 40 )
+texture = ExtResource( 2 )
+
+[node name="Sprite4" type="Sprite" parent="."]
+position = Vector2( 8, 56 )
+texture = ExtResource( 2 )
+
+[node name="Sprite5" type="Sprite" parent="."]
+position = Vector2( 8, 72 )
+texture = ExtResource( 2 )
+
+[node name="Sprite6" type="Sprite" parent="."]
+position = Vector2( 8, 88 )
+texture = ExtResource( 2 )
+
+[node name="Sprite7" type="Sprite" parent="."]
+position = Vector2( 8, 104 )
+texture = ExtResource( 2 )
+
+[node name="Sprite8" type="Sprite" parent="."]
+position = Vector2( 8, 120 )
+texture = ExtResource( 2 )
+
+[node name="Sprite9" type="Sprite" parent="."]
+position = Vector2( 8, 136 )
+texture = ExtResource( 2 )
+
+[node name="Sprite10" type="Sprite" parent="."]
+position = Vector2( 8, 152 )
+texture = ExtResource( 2 )
+
+[node name="Sprite11" type="Sprite" parent="."]
+position = Vector2( 8, 168 )
+texture = ExtResource( 2 )
+
+[node name="Sprite12" type="Sprite" parent="."]
+position = Vector2( 8, 184 )
+texture = ExtResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]
+

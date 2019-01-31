@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://entidade_matrix_1.png" type="Texture" id=1]
+[ext_resource path="res://entidade_matrix_2.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Area2D
+
+var hspeed = 150
+
+func _process(delta):
+	if Global.character in get_overlapping_bodies():
+		Global.character.die()
+	var speed = Vector2(-hspeed,0)
+	position.x -= hspeed * delta
+	if position.x < -100:
+		queue_free()"
+
+[sub_resource type="RectangleShape2D" id=2]
+
+extents = Vector2( 4.22914, 3.72821 )
+
+[sub_resource type="SpriteFrames" id=3]
+
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Sentinel" type="Area2D"]
+script = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 3 )
+playing = true
+

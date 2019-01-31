@@ -1,0 +1,84 @@
+------------------------------
+FORTALEZA
+Escombros (Escombros caindo do teto) 16x16
+	-Aviso da Queda
+	-Escombros caindo
+	-Escombros quebrando
+Plataforma (Plataformas as quais o personagem pode apertar pra baixo pra cair) 16x8 (Interconectáveis)
+
+Inimigos (Robôs oponentes) 
+
+Armadilha (Parede elétrica ou flamejante que anda para a direita) 32x92
+	-Parede ativa
+	-Parede desligada (Ao chocar com a parede)
+
+Botão	16x??
+	-Ativo
+	-Desligado
+Barril Enferrujado 16x16
+
+Campo de Força Vertical 16x16 (Interconectado)
+	-Ligado
+	-Desligado
+------------------------------
+COLETA
+
+Coluna/Pistão 16X16
+	-Topo, Borda Direita
+	-Topo, Borda Esquerda
+	-Topo, Meio
+	-Coluna, Borda Direita (Interconectado)
+	-Coluna, Borda Esquerda (Interconectado)
+	-Coluna, Meio (Interconectado)
+
+Coluna/Pistão Quente (Causa danos) 16X16
+	-Topo, Borda Direita
+	-Topo, Borda Esquerda
+	-Topo, Meio
+	-Coluna, Borda Direita (Interconectado)
+	-Coluna, Borda Esquerda (Interconectado)
+	-Coluna, Meio (Interconectado)
+
+
+Plataforma (Plataformas as quais o personagem pode apertar pra baixo pra cair) 16x8 (Interconectáveis)
+
+Plataforma Flutuante (Vai para direita e esquerda) 48x8
+
+Sofá 32x32
+
+Antena de Satélite 32x32
+
+Televisão Antiga 32x32
+
+Escadas 16x16 (Interconectáveis)
+
+Armadilha (Chão elétrico ou flamejante ou piscina de ácido) 160x16
+
+Robozinho do Laser (Robo preso no teto que anda da esquerda pra direita e atira lasers)
+	-Robôzim
+	-Disparo do Laser do Robôzim
+
+------------------------------
+VOLTA
+Escadas 16x16 (Interconectáveis)
+
+Sentinelas (Robôzinhos tipo sentinela matrix que vão da direita pra esquerda) 16x16
+	-Animação de Movimento
+
+Campo de Força Horizontal 16x16 (Interconectado)
+	-Ligado
+	-Desligado
+
+Campo de Força Vertical 16x16 (Interconectado)
+	-Ligado
+	-Desligado
+
+Bloco de Sucata Compactada 16x16
+
+Botão	16x??
+	-Ativo
+	-Desligado
+------------------------------
+
+
+
