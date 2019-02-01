@@ -20,7 +20,7 @@
 [ext_resource path="res://L1Button.gd" type="Script" id=18]
 [ext_resource path="res://button.png" type="Texture" id=19]
 
-[sub_resource type="GDScript" id=13]
+[sub_resource type="GDScript" id=1]
 
 script/source = "extends Area2D
 
@@ -52,10 +52,10 @@ func exit(body):
 		$\"..\".queue_free()
 "
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=2]
 
 
-[sub_resource type="SpriteFrames" id=12]
+[sub_resource type="SpriteFrames" id=3]
 
 animations = [ {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
@@ -64,19 +64,19 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=4]
 
 extents = Vector2( 16, 40 )
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=5]
 
 shader = ExtResource( 15 )
 
-[sub_resource type="ViewportTexture" id=3]
+[sub_resource type="ViewportTexture" id=6]
 
 viewport_path = NodePath("ShaderLabel/Viewport")
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=7]
 
 script/source = "extends Node
 
@@ -85,11 +85,11 @@ func _ready():
 		(child as Node).add_to_group(\"blue_door\")
 "
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=8]
 
 extents = Vector2( 7.24471, 0.678345 )
 
-[sub_resource type="GDScript" id=6]
+[sub_resource type="GDScript" id=9]
 
 script/source = "extends Area2D
 
@@ -101,11 +101,11 @@ func _process(delta):
 		burned = true
 "
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=10]
 
 extents = Vector2( 10, 19.6931 )
 
-[sub_resource type="GDScript" id=8]
+[sub_resource type="GDScript" id=11]
 
 script/source = "extends Area2D
 
@@ -117,7 +117,7 @@ func _process(delta):
 		burned = true
 "
 
-[sub_resource type="GDScript" id=9]
+[sub_resource type="GDScript" id=12]
 
 script/source = "extends Area2D
 
@@ -140,14 +140,14 @@ texture = ExtResource( 2 )
 
 [node name="Portal" type="Area2D" parent="."]
 position = Vector2( 456, 80 )
-script = SubResource( 13 )
+script = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portal"]
-shape = SubResource( 11 )
+shape = SubResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Portal"]
 modulate = Color( 0.364706, 0.364706, 0.364706, 1 )
-frames = SubResource( 12 )
+frames = SubResource( 3 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 5 )
@@ -200,7 +200,7 @@ script = ExtResource( 11 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HomingWallTrigger"]
 position = Vector2( 16, 40 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 
 [node name="Goomba" parent="." instance=ExtResource( 12 )]
 position = Vector2( 112, 176 )
@@ -230,29 +230,33 @@ but I have shelter."
 align = 1
 
 [node name="TextureRect" type="TextureRect" parent="ShaderLabel"]
-material = SubResource( 2 )
+material = SubResource( 5 )
 margin_right = 300.0
 margin_bottom = 100.0
-texture = SubResource( 3 )
+texture = SubResource( 6 )
 expand = true
 
 [node name="Box" parent="." instance=ExtResource( 16 )]
 position = Vector2( 288, 80 )
 
 [node name="Doors" type="Node" parent="."]
-script = SubResource( 4 )
+script = SubResource( 7 )
 
 [node name="Door" parent="Doors" instance=ExtResource( 17 )]
 position = Vector2( 352, 32 )
+frame = 1
 
 [node name="Door2" parent="Doors" instance=ExtResource( 17 )]
 position = Vector2( 352, 48 )
+frame = 1
 
 [node name="Door3" parent="Doors" instance=ExtResource( 17 )]
 position = Vector2( 352, 64 )
+frame = 1
 
 [node name="Door4" parent="Doors" instance=ExtResource( 17 )]
 position = Vector2( 352, 80 )
+frame = 1
 
 [node name="Button" type="Area2D" parent="."]
 position = Vector2( 320, 80 )
@@ -260,7 +264,7 @@ script = ExtResource( 18 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Button"]
 position = Vector2( 7.57072, 13.5806 )
-shape = SubResource( 5 )
+shape = SubResource( 8 )
 
 [node name="Sprite" type="Sprite" parent="Button"]
 position = Vector2( 8, 8 )
@@ -269,25 +273,25 @@ texture = ExtResource( 19 )
 [node name="TextColliders" type="Node" parent="."]
 
 [node name="Text1" type="Area2D" parent="TextColliders"]
-script = SubResource( 6 )
+script = SubResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TextColliders/Text1"]
 position = Vector2( 392, 248 )
-shape = SubResource( 7 )
+shape = SubResource( 10 )
 
 [node name="Text2" type="Area2D" parent="TextColliders"]
 position = Vector2( -16, -80 )
-script = SubResource( 8 )
+script = SubResource( 11 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TextColliders/Text2"]
 position = Vector2( 392, 248 )
-shape = SubResource( 7 )
+shape = SubResource( 10 )
 
 [node name="Text3" type="Area2D" parent="TextColliders"]
 position = Vector2( -8, -176 )
-script = SubResource( 9 )
+script = SubResource( 12 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TextColliders/Text3"]
 position = Vector2( 392, 248 )
-shape = SubResource( 7 )
+shape = SubResource( 10 )
 
