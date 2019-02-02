@@ -5,7 +5,7 @@ func _process(delta):
 		restart()
 
 func _ready():
-	$Button.connect("change_state",self,"on_buton_change_state")
+	$Button.connect("change_state",self,"on_button_change_state")
 	Global.startscreen.get_node("CanvasLayer/CRT").visible = true
 	$Portal.enabled = true
 		
@@ -14,6 +14,8 @@ func restart():
 		return
 	Global.transitioning = true
 	Global.transition.fade_to(1.0,0.5)
-	yield(Global.transition,"done")
+	Global.transition.connect("done",self,"after_black")
+	
+func after_black():
 	Global.goto("res://fase1.tscn")
 	queue_free()

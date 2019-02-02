@@ -10,7 +10,7 @@ var ladder_climb_speed = 100
 var climbing = false
 var pressed_up = false
 var respawn
-
+var dead = false
 var platform = null
 
 var on_floor = false
@@ -120,5 +120,7 @@ func on_liftoff(object):
 
 
 func die():
-	$CollisionShape2D.disabled = true
-	get_parent().restart()
+	if dead == false:
+		dead = true
+		$CollisionShape2D.disabled = true
+		get_parent().restart()

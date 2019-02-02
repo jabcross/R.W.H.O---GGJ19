@@ -16,10 +16,12 @@ func _process(delta):
 		restart()
 
 func restart():
-	if Global.transitioning:
+	if Global.transitioning == true:
 		return
+	Global.transitioning = true
 	Global.transition.fade_to(1.0,0.5)
-	yield(Global.transition,"done")
+	Global.transition.connect("done",self,"after_black")
+	
+func after_black():
+	Global.goto("res://Level2.tscn")
 	queue_free()
-	get_parent().add_child(preload("res://Level2.tscn").instance())
-	Global.transition.fade_to(0.0,0.5)

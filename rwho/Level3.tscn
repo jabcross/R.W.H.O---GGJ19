@@ -43,12 +43,13 @@ func shoot():
 func restart():
 	if Global.transitioning:
 		return
+	Global.transitioning = true
 	Global.transition.fade_to(1.0,0.5)
-	yield(Global.transition,\"done\")
-	get_parent().add_child(preload(\"res://Level3.tscn\").instance())
-	Global.transition.fade_to(0.0,0.5)
-	queue_free()
-"
+	Global.transition.connect(\"done\",self,\"after_black\")
+	
+func after_black():
+	Global.goto(\"res://Level3.tscn\")
+	queue_free()"
 
 [sub_resource type="GDScript" id=2]
 
@@ -189,15 +190,12 @@ script = SubResource( 2 )
 
 [node name="Door" parent="Door1" instance=ExtResource( 5 )]
 position = Vector2( 128, 256 )
-frame = 0
 
 [node name="Door2" parent="Door1" instance=ExtResource( 5 )]
 position = Vector2( 128, 240 )
-frame = 0
 
 [node name="Door3" parent="Door1" instance=ExtResource( 5 )]
 position = Vector2( 128, 224 )
-frame = 0
 
 [node name="Platforms" type="Node" parent="."]
 editor/display_folded = true
@@ -298,7 +296,6 @@ script = SubResource( 3 )
 [node name="Door" parent="Door2" instance=ExtResource( 5 )]
 position = Vector2( 320, 32 )
 rotation = -1.5708
-frame = 0
 
 [node name="Door2" parent="Door2" instance=ExtResource( 5 )]
 position = Vector2( 336, 32 )

@@ -17,13 +17,16 @@ func set_character(c):
 	assert(c is Object)
 	character = c
 
+func _process(delta):
+	print(transitioning)
+
 func goto(path):
 	transitioning = true
 	yield(get_tree().create_timer(0.2),"timeout")
 	var instance = load(path).instance()
 	startscreen.get_node("Level").add_child(instance)
-	Global.transition.fade_to(0.0,0.5)
-	yield(get_tree().create_timer(0.2),"timeout")
+	transition.fade_to(0.0,0.5)
+	yield(transition,"done")
 	transitioning = false
 	
 func _input(event):
